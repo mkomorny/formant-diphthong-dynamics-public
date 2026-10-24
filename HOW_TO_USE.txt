@@ -1,0 +1,54 @@
+HOW TO USE: formant-diphthong-dynamics
+====================================
+
+PURPOSE
+  Model time-varying formant trajectories (onset, nucleus, offset in ms) for primary diphthongs
+  (FACE, PRICE, GOAT, MOUTH, CHOICE), consonant locus equations for /b d g/, and Euclidean VSA.
+
+CAPABILITIES
+  - Map 3-point time-series formant trajectories (F1/F2/F3 at 20%, 50%, 80% duration)
+  - Calculate diphthong glide velocity (Hz/ms) and Euclidean trajectory vector length
+  - Compute consonant-vowel locus equations for stops (/b, d, g/): F2_onset = m * F2_vowel + k
+  - Calculate Euclidean Vowel Space Area (VSA in Hz2) and Formant Centralization Ratio (FCR)
+  - Measure stop consonant formant transition durations (ms) into steady-state vowels
+  - Output machine-readable diphthong_trajectories.json
+
+USE CASES
+  - "Stop using static formant averages—map the actual glide curves of this accent"
+  - You want to capture the distinctive offglide of New York or Southern diphthongs
+  - You are tuning formant synthesis transition timers (KlattGrid time-varying tiers)
+  - You need locus equation slopes to evaluate articulatory coarticulation resistance
+
+IDEAS
+  - Pair with idiolect-phonetic-atlas to attach dynamic glides to Wells lexical sets
+  - Use locus slopes to ensure synthetic stop-to-vowel transitions sound natural
+  - Check VSA compression in clone-verification-match-score
+
+PROMPTS YOU CAN PASTE
+  /formant-dynamics Queens-male-orator
+
+  formant dynamics for Steve Jobs
+
+  diphthong trajectories of this speaker
+
+  locus equations for /b d g/ and Euclidean VSA for this voice
+
+  Give me the millisecond formant curves for PRICE, MOUTH, and GOAT for this accent.
+
+EXAMPLE FLOW
+  You:   /formant-dynamics Queens-male-orator
+  Model: 1. Diphthong Trajectories:
+         - PRICE: t20=[740,1220,2450], t50=[650,1540,2480], t80=[480,1920,2550] (4.0 Hz/ms)
+         - GOAT: t20=[520,1080,2380], t80=[440,920,2410] (near-monophthongal glide)
+         2. Locus Equations:
+         - /b/: slope=0.72, intercept=420 Hz
+         - /d/: slope=0.41, intercept=1180 Hz (high coarticulation resistance)
+         3. Vowel Space:
+         - Euclidean VSA: 285,400 Hz2, FCR: 1.04
+         [diphthong_trajectories.json]
+
+DEFAULT GOALS IF YOU DON'T NAME ONE
+  1. Time-varying formant coordinates (F1-F3 at 20/50/80%) for major diphthongs
+  2. Consonant locus equations (slope and intercept) for /b d g/
+  3. Euclidean Vowel Space Area (VSA)
+  4. Machine-readable diphthong_trajectories.json block
